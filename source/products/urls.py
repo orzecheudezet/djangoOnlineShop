@@ -11,10 +11,12 @@ ProductListView,
 ProductDetailSlugView
 )
 
+app_name = 'products'
+
 urlpatterns = [
 
-    path('', ProductListView.as_view()),
-    path('<slug:slug>/', ProductDetailSlugView.as_view()),
+    path('', ProductListView.as_view(), name='list'),
+    path('<slug:slug>/', ProductDetailSlugView.as_view(), name='detail'),
     # path('productsfbv/<int:pk>/', product_detail_view),
     # path('productsfbv/', product_list_view),
     # path('products/<int:pk>/', ProductDetailView.as_view()),
