@@ -6,6 +6,10 @@ from django.contrib.auth import authenticate, login, get_user_model
 from .forms import ContactForm, LoginForm, RegisterForm
 
 def home_page(request):
+    # if not request.user.is_authenticated():
+    #     return Login
+    #print(request.session.get("first_name", "Unknown")) #Getter
+    print(request.session.get("user", "Unknown"))
     context = {
         "title":"Hello World",
         "content":"Welcome to the homepage.",
