@@ -2,7 +2,9 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import pre_save, post_save, m2m_changed
 
+
 from products.models import Product
+
 
 User = settings.AUTH_USER_MODEL
 # Create your models here.
@@ -58,8 +60,8 @@ m2m_changed.connect(m2m_changed_cart_reciver, sender=Cart.products.through)
 
 def pre_save_cart_reciver(sender, instance, *args, **kwargs):
     if instance.subtotal > 0:
-        instance.total = instance.subtotal + 10
+        instance.total = float(instance.subtotal) * float(1.23)
     else:
-        instance.total = 0    
+        instance.total = 0
 
 pre_save.connect(pre_save_cart_reciver, sender=Cart)
