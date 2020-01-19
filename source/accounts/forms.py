@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+class GuestForm(forms.Form):
+    email = forms.EmailField()
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
@@ -25,7 +28,7 @@ class RegisterForm(forms.Form):
         qs = User.objects.filter(email=email)
         if qs.exists():
             raise forms.ValidationError("Email is taken")
-        return username
+        return email
 
     def clean(self):
         data = self.cleaned_data
