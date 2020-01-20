@@ -37,9 +37,12 @@ def login_page(request):
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user is not None:
             login(request, user)
+            try:
+                del rquest.session['guest_email_id']
+            except:
+                pass
             if is_safe_url(redirect_path, request.get_host()):
                 return redirect(redirect_path)
             else:
