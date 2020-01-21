@@ -9,23 +9,29 @@
 
 {% block content %}
 <body>
-<div class='text-center'>
-  <h1>{{ title }}</h1>
-  <h1>Hello, world we're working!</h1>
-</div>
 
-  <div class="row">
-    <div class="col">
-      <img src="{% static "img/beachimg.jpg" %}" class="img-fluid">
-      <p>{{ content }}</p>
-    </div>
-  </div>
+
 {% if request.user.is_authenticated  %}
 <div class="row">
-  <div class="col">
-    <h1>Premium</h1>
-    {{ premium_content }}
+  <div class="col"><b>
+
+    Your're logged as:
+    {{ request.user.username }}</b>
   </div>
 </div>
 {% endif %}
+{% endblock %}
+
+<div class="row">
+  {% for obj in object_list %}
+      <div class="col">
+      {{ forloop.counter }}
+      {% include 'products/snippets/card.html' with instance=obj %}
+
+      {% if forloop.counter|divisibleby:3 %}
+        </div> </div> <div class="row"><div class="col-12"><hr/></div>
+      {% else %}
+        </div>
+      {% endif %}
+  {% endfor %}
 {% endblock %}

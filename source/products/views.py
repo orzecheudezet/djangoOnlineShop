@@ -16,7 +16,7 @@ class ProductFeaturedListView(ListView):
 
 class ProductFeaturedDetailView(DetailView):
     queryset = Product.objects.all().featured()
-    template_name = "products/featured_detail.html"
+    template_name = "onlineShop/home_page.html"
 
     # def get_queryset(self, *args, **kwargs):
     #     request = self.request
